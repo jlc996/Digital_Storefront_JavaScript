@@ -102,14 +102,24 @@ document.addEventListener("DOMContentLoaded", () => {
         modalDescription.innerHTML = `
             <ul class="text-start">
                 ${service.details
-                    .map(d => `<li>${d}</li>`)
-                    .join("")}
+                .map(d => `<li>${d}</li>`)
+                .join("")}
             </ul>
         `;
 
-        document.getElementById("modalAddBtn").onclick = () => {
-            addToCart(service);
-        };
+        const modalAddBtn =
+            document.getElementById("modalAddBtn");
+
+        modalAddBtn.replaceWith(
+            modalAddBtn.cloneNode(true)
+        );
+
+        document
+            .getElementById("modalAddBtn")
+            .addEventListener(
+                "click",
+                () => addToCart(service)
+            );
 
         new bootstrap.Modal(
             document.getElementById("serviceModal")

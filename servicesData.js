@@ -18,6 +18,7 @@ const services = [
             "Custom RGB configurations",
             "Professional cable management"
         ],
+        featured: true,
         inStock: true
     },
 
@@ -36,6 +37,7 @@ const services = [
             "Component replacement",
             "System cleanup"
         ],
+        featured: true,
         inStock: true
     },
 
@@ -54,6 +56,7 @@ const services = [
             "CPU cooling upgrades",
             "Performance tuning"
         ],
+        featured: true,
         inStock: true
     },
 

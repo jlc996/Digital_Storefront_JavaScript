@@ -2,157 +2,379 @@ console.log("🔥 index.js loaded");
 
 document.addEventListener("DOMContentLoaded", () => {
 
+
     // =======================
     // DOM REFERENCES
     // =======================
+
     const featuredContainer =
         document.getElementById("featured-services");
 
     const cartCount =
         document.getElementById("cart-count");
 
+
     // =======================
     // SAFETY CHECKS
     // =======================
+
     if (!featuredContainer) {
         console.error("❌ Missing #featured-services");
         return;
     }
 
+
     if (!window.services || !Array.isArray(window.services)) {
-        console.error("❌ servicesData.js failed to load");
+        console.error(
+            "❌ servicesData.js failed to load"
+        );
         return;
     }
 
+
     // =======================
     // UPDATE CART BADGE
+    // Reads saved cart from localStorage
     // =======================
+
     function updateCartCount() {
 
         const cart =
-            JSON.parse(localStorage.getItem("cart")) || [];
+            JSON.parse(
+                localStorage.getItem("cart")
+            ) || [];
+
 
         const totalQty =
             cart.reduce(
-                (sum, item) => sum + (item.quantity || 1),
+                (sum, item) =>
+                    sum + (item.quantity || 1),
                 0
             );
+
 
         if (cartCount) {
             cartCount.textContent = totalQty;
         }
+
     }
 
+
+
     // =======================
-    // STAR RENDERING
+    // CREATE STAR DISPLAY
     // =======================
+
     function getStars(rating = 4.5) {
 
-        let stars = "";
+        const starContainer =
+            document.createElement("span");
+
 
         for (let i = 1; i <= 5; i++) {
 
+
+            const star =
+                document.createElement("i");
+
+
             if (rating >= i) {
-                stars += `<i class="bi bi-star-fill text-warning"></i>`;
+
+                star.className =
+                    "bi bi-star-fill text-warning";
+
             }
+
             else if (rating >= i - 0.5) {
-                stars += `<i class="bi bi-star-half text-warning"></i>`;
+
+                star.className =
+                    "bi bi-star-half text-warning";
+
             }
+
             else {
-                stars += `<i class="bi bi-star text-warning"></i>`;
+
+                star.className =
+                    "bi bi-star text-warning";
+
             }
+
+
+            starContainer.appendChild(star);
+
         }
 
-        return stars;
+
+        return starContainer;
+
     }
+
+
 
     // =======================
     // RENDER FEATURED SERVICES
+    // Creates cards dynamically
     // =======================
+
     function renderFeaturedServices() {
 
-        featuredContainer.innerHTML = "";
 
-        const featured =
-            window.services.slice(0, 3);
+        // Clear existing content
 
-        featured.forEach(service => {
+        featuredContainer.textContent = "";
+
+
+        // Only show featured services
+
+        const featuredServices =
+            window.services.filter(
+                service =>
+                    service.featured === true
+            );
+
+
+
+        // Loop through data
+
+        featuredServices.forEach(service => {
+
+
+
+            // Column wrapper
 
             const col =
                 document.createElement("div");
 
+
             col.className =
                 "col-md-4";
 
-            col.innerHTML = `
-                <div class="card h-100 shadow">
 
-                    <img
-                        src="${service.image}"
-                        alt="${service.name}"
-                        class="card-img-top"
-                        style="height:200px; object-fit:cover;">
 
-                    <div class="card-body text-center">
+            // Card container
 
-                        <h5 class="card-title">
-                            ${service.name}
-                        </h5>
+            const card =
+                document.createElement("div");
 
-                        <h3 class="text-primary">
-                            $${service.price}
-                        </h3>
 
-                        <div class="mb-2">
-                            ${getStars(service.rating)}
-                        </div>
+            card.className =
+                "card h-100 shadow";
 
-                        <p class="card-text">
-                            ${service.description}
-                        </p>
 
-                        <div class="d-flex justify-content-center gap-2">
 
-                            <a href="services.html"
-                                class="btn btn-outline-secondary">
+            // Service image
 
-                                View Service
+            const image =
+                document.createElement("img");
 
-                            </a>
 
-                            <button
-                                class="btn btn-primary add-cart">
+            image.src =
+                service.image;
 
-                                Add To Cart
 
-                            </button>
+            image.alt =
+                service.name;
 
-                        </div>
 
-                    </div>
+            image.className =
+                "card-img-top";
 
-                </div>
-            `;
 
-            col.querySelector(".add-cart")
-                .addEventListener("click", () => {
+            image.style.height =
+                "200px";
+
+
+            image.style.objectFit =
+                "cover";
+
+
+
+            // Card body
+
+            const body =
+                document.createElement("div");
+
+
+            body.className =
+                "card-body text-center";
+
+
+
+            // Service name
+
+            const title =
+                document.createElement("h5");
+
+
+            title.className =
+                "card-title";
+
+
+            title.textContent =
+                service.name;
+
+
+
+            // Price
+
+            const price =
+                document.createElement("h3");
+
+
+            price.className =
+                "text-primary";
+
+
+            price.textContent =
+                `$${service.price}`;
+
+
+
+            // Rating
+
+            const stars =
+                getStars(service.rating);
+
+
+            stars.className =
+                "mb-2";
+
+
+
+            // Description
+
+            const description =
+                document.createElement("p");
+
+
+            description.className =
+                "card-text";
+
+
+            description.textContent =
+                service.description;
+
+
+
+            // Button area
+
+            const buttonArea =
+                document.createElement("div");
+
+
+            buttonArea.className =
+                "d-flex justify-content-center gap-2";
+
+
+
+            // View button
+
+            const viewButton =
+                document.createElement("a");
+
+
+            viewButton.href =
+                "services.html";
+
+
+            viewButton.className =
+                "btn btn-outline-secondary";
+
+
+            viewButton.textContent =
+                "View Service";
+
+
+
+            // Cart button
+
+            const cartButton =
+                document.createElement("button");
+
+
+            cartButton.className =
+                "btn btn-primary";
+
+
+            cartButton.textContent =
+                "Add To Cart";
+
+
+
+            // Add cart event
+
+            cartButton.addEventListener(
+                "click",
+                () => {
+
 
                     addToCart({
-                        id: service.id,
-                        name: service.name,
-                        price: service.price
+
+                        id:
+                            service.id,
+
+                        name:
+                            service.name,
+
+                        price:
+                            service.price
+
                     });
 
-                });
+
+                    updateCartCount();
+
+                }
+            );
+
+
+
+            // Build card
+
+            buttonArea.appendChild(viewButton);
+
+            buttonArea.appendChild(cartButton);
+
+
+            body.appendChild(title);
+
+            body.appendChild(price);
+
+            body.appendChild(stars);
+
+            body.appendChild(description);
+
+            body.appendChild(buttonArea);
+
+
+
+            card.appendChild(image);
+
+            card.appendChild(body);
+
+
+
+            col.appendChild(card);
+
+
 
             featuredContainer.appendChild(col);
+
+
+
         });
+
     }
 
+
+
     // =======================
-    // INIT
+    // INITIALIZE PAGE
     // =======================
+
     updateCartCount();
+
     renderFeaturedServices();
+
 
 });

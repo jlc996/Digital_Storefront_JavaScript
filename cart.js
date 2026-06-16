@@ -173,90 +173,222 @@ function updateOrderSummary() {
 // ===============================
 // RENDER CART (NO DUPLICATES)
 // ===============================
+// ===============================
+// RENDER CART
+// ===============================
 function renderCart(containerId) {
 
-  const container = document.getElementById(containerId);
-  if (!container) return;
+    const container =
+        document.getElementById(containerId);
 
-  const cart = getCart();
+    if (!container) return;
 
-  // 🔥 ALWAYS CLEAR FIRST (prevents duplicate DOM)
-  container.innerHTML = "";
 
-  if (cart.length === 0) {
-    container.innerHTML = `
-            <div class="col-12 text-center">
-                <div class="card shadow-sm p-4">
-                    <h4>Your cart is empty</h4>
-                    <a href="services.html" class="btn btn-primary mt-3">
-                        Browse Services
-                    </a>
-                </div>
-            </div>
-        `;
-    return;
-  }
+    const cart = getCart();
 
-  cart.forEach(item => {
 
-    const col = document.createElement("div");
-    col.className = "col-md-6";
+    container.textContent = "";
 
-    col.innerHTML = `
-            <div class="card h-100 shadow-sm">
 
-                <div class="card-body">
+    if (cart.length === 0) {
 
-    <h5 class="card-title">
-        ${item.name}
-    </h5>
+        const empty =
+            document.createElement("div");
 
-    <h4 class="text-primary">
-        $${item.price}
-    </h4>
+        empty.className =
+            "col-12 text-center";
 
-    <!-- QUANTITY CONTROLS -->
-    <div class="d-flex align-items-center justify-content-center gap-2 mt-3">
 
-        <button class="btn btn-sm btn-outline-danger"
-            onclick="decreaseQty('${item.id}')">
+        empty.innerHTML = `
+            <div class="card shadow-sm p-4">
+                <h4>Your cart is empty</h4>
 
-            -
+                <a href="services.html"
+                class="btn btn-primary mt-3">
 
-        </button>
+                    Browse Services
 
-        <span class="fw-bold">
-            ${item.quantity}
-        </span>
-
-        <button class="btn btn-sm btn-outline-success"
-            onclick="increaseQty('${item.id}')">
-
-            +
-
-        </button>
-
-    </div>
-
-</div>
-
-                <div class="card-footer bg-transparent border-0">
-
-                    <button
-                        class="btn btn-danger w-100"
-                        onclick="removeFromCart('${item.id}')">
-
-                        Remove
-
-                    </button>
-
-                </div>
-
+                </a>
             </div>
         `;
 
-    container.appendChild(col);
-  });
+
+        container.appendChild(empty);
+
+        return;
+    }
+
+
+
+    cart.forEach(item => {
+
+
+        const col =
+            document.createElement("div");
+
+
+        col.className =
+            "col-md-6";
+
+
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "card h-100 shadow-sm";
+
+
+
+        const body =
+            document.createElement("div");
+
+
+        body.className =
+            "card-body text-center";
+
+
+
+        const title =
+            document.createElement("h5");
+
+
+        title.textContent =
+            item.name;
+
+
+
+        const price =
+            document.createElement("h4");
+
+
+        price.className =
+            "text-primary";
+
+
+        price.textContent =
+            `$${item.price}`;
+
+
+
+        const qtyArea =
+            document.createElement("div");
+
+
+        qtyArea.className =
+            "d-flex justify-content-center gap-2 mt-3";
+
+
+
+        const minus =
+            document.createElement("button");
+
+
+        minus.className =
+            "btn btn-sm btn-outline-danger";
+
+
+        minus.textContent =
+            "-";
+
+
+
+        minus.addEventListener(
+            "click",
+            () => decreaseQty(item.id)
+        );
+
+
+
+        const qty =
+            document.createElement("span");
+
+
+        qty.className =
+            "fw-bold";
+
+
+        qty.textContent =
+            item.quantity;
+
+
+
+        const plus =
+            document.createElement("button");
+
+
+        plus.className =
+            "btn btn-sm btn-outline-success";
+
+
+        plus.textContent =
+            "+";
+
+
+
+        plus.addEventListener(
+            "click",
+            () => increaseQty(item.id)
+        );
+
+
+
+        qtyArea.appendChild(minus);
+        qtyArea.appendChild(qty);
+        qtyArea.appendChild(plus);
+
+
+
+        const footer =
+            document.createElement("div");
+
+
+        footer.className =
+            "card-footer bg-transparent";
+
+
+
+        const remove =
+            document.createElement("button");
+
+
+        remove.className =
+            "btn btn-danger w-100";
+
+
+        remove.textContent =
+            "Remove";
+
+
+
+        remove.addEventListener(
+            "click",
+            () => removeFromCart(item.id)
+        );
+
+
+
+        footer.appendChild(remove);
+
+
+
+        body.appendChild(title);
+        body.appendChild(price);
+        body.appendChild(qtyArea);
+
+
+        card.appendChild(body);
+        card.appendChild(footer);
+
+
+        col.appendChild(card);
+
+
+        container.appendChild(col);
+
+    });
+
 }
 
 // ===============================

@@ -1,0 +1,239 @@
+/* =========================
+   1. CSS VARIABLES (THEME)
+========================= */
+:root {
+    --primary-color: #020a11;    /* Navbar & Footer */
+    --accent-color: #0e71f1;     /* Buttons & Highlights */
+    --accent-color-2: #f5a328;   /* Hover Accent */
+    --bg-light: #b0c4bd;         /* Page Background */
+    --card-bg: #eedb9f;          /* Card Background */
+    --text-main: #333333;        /* General Text */
+    --text-light: #ffffff;       /* Light Text */
+    --container-width: 1100px;
+}
+
+
+/* =========================
+   2. RESET & BASE
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    background-color: var(--bg-light);
+    color: var(--text-main);
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+/* =========================
+   3. NAVBAR
+========================= */
+.custom-navbar {
+    background-color: var(--primary-color);
+}
+
+/* Navbar text */
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+    color: var(--text-light);
+}
+
+/* Active link */
+.custom-navbar .nav-link.active {
+    color: var(--accent-color) !important;
+    font-weight: 600;
+}
+
+/* Hover */
+.custom-navbar .nav-link:hover {
+    color: var(--accent-color);
+}
+
+/* underline animation */
+.custom-navbar .nav-link {
+    position: relative;
+}
+
+.custom-navbar .nav-link::after {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--accent-color-2);
+    transition: width 0.3s ease;
+}
+
+.custom-navbar .nav-link:hover::after,
+.custom-navbar .nav-link.active::after {
+    width: 100%;
+}
+
+/* navbar toggler */
+.navbar-toggler {
+    border-color: var(--text-light);
+}
+
+.navbar-toggler-icon {
+    filter: invert(1);
+}
+
+
+/* =========================
+   4. HERO SECTION
+========================= */
+.hero {
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url('https://images.pexels.com/photos/1714208/pexels-photo-1714208.jpeg');
+
+    background-size: cover;
+    background-position: center;
+
+    min-height: 60vh;
+    min-height: 60dvh;
+
+    display: flex;
+    align-items: center;
+}
+
+.hero h1,
+.hero p {
+    display: inline-block;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(5px);
+}
+
+.hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 15px;
+}
+
+
+/* =========================
+   5. BUTTONS
+========================= */
+.btn,
+.hero-btn {
+    background-color: var(--accent-color);
+    color: var(--text-light);
+
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+
+    transition: all 0.3s ease;
+}
+
+.btn:hover,
+.hero-btn:hover {
+    background-color: var(--accent-color-2);
+    color: var(--text-main);
+    transform: scale(1.05);
+}
+
+
+/* =========================
+   6. LAYOUT FIX (IMPORTANT)
+========================= */
+/* DO NOT override Bootstrap container */
+.page-container {
+    width: 90%;
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+
+/* =========================
+   7. CARDS (FIXED)
+========================= */
+.card {
+    background: var(--card-bg);
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* image fix */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* ensure readable text */
+.card-body {
+    color: var(--text-main);
+    text-align: center;
+}
+
+
+/* =========================
+   8. MODALS
+========================= */
+.modal-content {
+    background-color: var(--card-bg);
+    color: var(--primary-color);
+}
+
+
+/* =========================
+   9. FOOTER
+========================= */
+.footer {
+    background: var(--primary-color);
+    color: var(--text-light);
+    width: 100%;
+}
+
+
+/* =========================
+   10. UTILITIES
+========================= */
+.bi-envelope,
+.bi-telephone {
+    margin-right: 0.5rem;
+}
+
+
+/* =========================
+   11. RESPONSIVE
+========================= */
+@media (max-width: 992px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        height: 50vh;
+    }
+}

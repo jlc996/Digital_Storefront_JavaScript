@@ -75,6 +75,7 @@ const services = [
             "Malware and virus scan",
             "Repair recommendations"
         ],
+        featured: false,
         inStock: true
     },
 
@@ -93,6 +94,7 @@ const services = [
             "Security vulnerability scan",
             "System performance optimization"
         ],
+        featured: false,
         inStock: true
     },
 
@@ -111,6 +113,7 @@ const services = [
             "Basic software setup",
             "Optional data backup"
         ],
+        featured: false,
         inStock: true
     },
 
@@ -129,6 +132,7 @@ const services = [
             "System optimization",
             "Improved multitasking"
         ],
+        featured: false,
         inStock: true
     },
 
@@ -147,6 +151,7 @@ const services = [
             "Drive optimization",
             "Data transfer support"
         ],
+        featured: false,
         inStock: true
     },
 
@@ -165,6 +170,7 @@ const services = [
             "Performance testing",
             "Cooling and airflow inspection"
         ],
+        featured: false,
         inStock: true
     }
 ];

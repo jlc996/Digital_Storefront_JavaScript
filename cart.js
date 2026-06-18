@@ -409,4 +409,51 @@ function refreshCartUI() {
 // ===============================
 // INIT
 // ===============================
-document.addEventListener("DOMContentLoaded", refreshCartUI);
+// ===============================
+// INIT
+// ===============================
+document.addEventListener("DOMContentLoaded", () => {
+
+    // Initial UI render
+    refreshCartUI();
+
+    // ===============================
+    // CLEAR CART BUTTON
+    // ===============================
+    const clearBtn =
+        document.getElementById("clear-cart-btn");
+
+    if (clearBtn) {
+
+        clearBtn.addEventListener("click", () => {
+
+            const confirmed =
+                confirm("Are you sure you want to clear your cart?");
+
+            if (confirmed) {
+                clearCart();
+            }
+
+        });
+
+    }
+
+    // ===============================
+    // CHECKOUT BUTTON
+    // ===============================
+    const checkoutBtn =
+        document.getElementById("checkout-btn");
+
+    if (checkoutBtn) {
+
+        checkoutBtn.addEventListener("click", () => {
+
+            alert(
+                "Checkout functionality coming soon!"
+            );
+
+        });
+
+    }
+
+});

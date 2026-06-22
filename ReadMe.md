@@ -2,11 +2,11 @@
 
 ## Project Overview
 
-Collab Computers JavaScript Storefront is a responsive multi-page business website designed to showcase computer services through a dynamic, data-driven interface.
+Collab Computers JavaScript Storefront is a responsive multi-page business website that demonstrates how a traditional static storefront can be transformed into a dynamic, data-driven web application using JavaScript.
 
-Unlike the original static storefront, this version uses JavaScript to generate service cards, featured services, and modal content from a centralized data source. This approach improves maintainability, scalability, and code reusability while demonstrating modern front-end development practices.
+The project utilizes a centralized data architecture, dynamic DOM rendering, event-driven interactions, and browser persistence through LocalStorage. Services, featured content, cart functionality, and user interactions are powered by JavaScript rather than hardcoded HTML.
 
-This project was created as part of the Mississippi Coding Academies Full Stack Development program to practice building dynamic web applications using HTML, CSS, Bootstrap, and JavaScript.
+This project was created as part of the Mississippi Coding Academies Full Stack Development Program and serves as the Phase II Capstone Project: The Dynamic Engine Upgrade.
 
 ---
 
@@ -18,153 +18,239 @@ https://jlc996.github.io/Digital_Storefront_JavaScript/
 
 ---
 
-# Features
+## Features
 
-## Dynamic Service Catalog
+### Dynamic Service Catalog
 
-Services are generated through JavaScript using a shared data structure.
+Services are stored inside a centralized JavaScript array of objects and rendered dynamically when the page loads.
 
-Each service includes:
+Each service contains:
 
-- Service name
-- Price
-- Description
-- Star rating
-- Image
-- Category information
+* ID
+* Name
+* Price
+* Description
+* Detailed Description
+* Image
+* Rating
+* Category
 
-This prevents duplicate HTML and allows services to be updated from one location.
+Benefits:
+
+* Eliminates duplicate HTML
+* Simplifies maintenance
+* Improves scalability
+* Demonstrates data-driven UI design
 
 ---
 
-## Featured Services Section
+### Featured Services
 
-The home page displays featured services dynamically.
+The homepage automatically generates featured service cards using JavaScript.
 
 Features include:
 
-- JavaScript generated service cards
-- Responsive Bootstrap layout
-- Reusable card components
-- Shared service data
+* Shared data source
+* Responsive Bootstrap layout
+* Dynamic card generation
+* Reusable rendering functions
 
 ---
 
-## Service Quick View Modals
+### Shopping Cart System
 
-Each service includes a Quick View modal.
+Users can add services directly to their shopping cart.
+
+Features include:
+
+* Add to Cart functionality
+* Dynamic cart badge updates
+* Quantity tracking
+* Cart total calculations
+* Remove items
+* Clear cart
+
+---
+
+### LocalStorage Persistence
+
+Cart data and user preferences are preserved using browser LocalStorage.
+
+Implemented with:
+
+* localStorage.setItem()
+* localStorage.getItem()
+* JSON.stringify()
+* JSON.parse()
+
+This ensures that cart contents remain available after page refreshes or navigation.
+
+---
+
+### Service Quick View Modals
+
+Each service includes a dynamic Quick View modal.
 
 Modal content includes:
 
-- Service title
-- Service image
-- Detailed description
-- Price
-- Customer rating
+* Service title
+* Service image
+* Detailed description
+* Pricing information
+* Customer ratings
 
-All modal information is generated dynamically using JavaScript.
-
----
-
-## Responsive Design
-
-Built using Bootstrap 5.3 to support:
-
-- Desktop
-- Tablet
-- Mobile devices
-
-The layout automatically adjusts using Bootstrap's responsive grid system.
+Modal data is generated from the shared service data structure.
 
 ---
 
-# Pages
+### Contact Form
 
-## Home Page
+The Contact page uses JavaScript to provide interactive form behavior.
 
-Includes:
+Features include:
 
-- Company introduction
-- Featured services
-- Navigation
-- Responsive layout
-
----
-
-## Services Page
-
-Displays all available services.
-
-Includes:
-
-- Dynamic service cards
-- Pricing
-- Ratings
-- Quick View modals
+* Form validation
+* Character counter
+* Success messages
+* Draft persistence
 
 ---
 
-## About Page
+### Newsletter Subscription
 
-Provides information about:
+Users can subscribe to the Collab Computers newsletter.
 
-- Company background
-- Founder story
-- Mission statement
+Features include:
+
+* Email validation
+* Duplicate subscription prevention
+* Subscriber tracking
+* LocalStorage persistence
+* Dynamic status messages
 
 ---
 
-## Reviews Page
+### Responsive Design
 
-Displays customer testimonials.
+Built using Bootstrap 5.3 and custom CSS.
+
+Supports:
+
+* Desktop
+* Tablet
+* Mobile devices
+
+Responsive elements include:
+
+* Navigation menu
+* Dynamic cards
+* Quick View modals
+* Shopping cart layout
+* Contact form
+
+---
+
+## Pages
+
+### Home Page
 
 Features:
 
-- Bootstrap cards
-- Star ratings
-- Responsive design
+* Hero section
+* Company overview
+* Featured services
+* Newsletter signup
 
 ---
 
-## Contact Page
+### Services Page
 
-Includes:
+Features:
 
-- Contact information
-- Email link
-- Phone number
-- Social media links
-
----
-
-# Technologies Used
-
-## Front-End
-
-- HTML5
-- CSS3
-- JavaScript ES6
-- Bootstrap 5.3
-- Bootstrap Icons
-
-## Concepts Practiced
-
-- DOM manipulation
-- Dynamic rendering
-- Reusable components
-- Data-driven UI design
-- JavaScript modules
-- Responsive layouts
+* Dynamic service catalog
+* Service ratings
+* Pricing
+* Quick View modals
+* Add to Cart functionality
 
 ---
 
-# Project Structure
+### Cart Page
+
+Features:
+
+* Dynamic cart rendering
+* Quantity tracking
+* Order summary
+* LocalStorage persistence
+
+---
+
+### About Page
+
+Features:
+
+* Company story
+* Founder information
+* Mission statement
+
+---
+
+### Reviews Page
+
+Features:
+
+* Customer testimonials
+* Star ratings
+* Responsive card layouts
+
+---
+
+### Contact Page
+
+Features:
+
+* Contact form
+* Service request form
+* Form validation
+* Draft saving
+* Social media links
+
+---
+
+## Technologies Used
+
+### Front-End
+
+* HTML5
+* CSS3
+* JavaScript ES6
+* Bootstrap 5.3
+* Bootstrap Icons
+
+### JavaScript Concepts Demonstrated
+
+* Arrays and Objects
+* DOM Manipulation
+* Event Listeners
+* Dynamic Rendering
+* LocalStorage Persistence
+* Form Validation
+* State Management
+* Reusable Components
+* Functional Array Methods
+* Responsive UI Development
+
+---
+
+## Project Structure
 
 ```text
 Digital_Storefront_JavaScript/
 
 ├── index.html
 ├── services.html
+├── cart.html
 ├── about.html
 ├── reviews.html
 ├── contact.html
@@ -174,14 +260,43 @@ Digital_Storefront_JavaScript/
 │   └── style.css
 │
 ├── js/
-│   ├── serviceData.js
+│   ├── servicesData.js
 │   ├── index.js
-│   └── services.js
+│   ├── services.js
+│   ├── cart.js
+│   ├── contact.js
+│   └── newsletter.js
 │
 ├── assets/
 │   └── images/
 │       ├── falcon-head-logo.png
 │       ├── founder.png
-│       └── service-images
+│       └── services/
 │
 └── README.md
+```
+
+---
+
+## Learning Outcomes
+
+This project demonstrates the transition from a static website to a dynamic JavaScript application by implementing:
+
+* Data architecture using arrays and objects
+* Dynamic DOM rendering
+* Event-driven programming
+* LocalStorage persistence
+* Responsive design principles
+* Reusable JavaScript components
+* State management techniques
+
+These concepts form the foundation of modern front-end application development.
+
+## Author
+
+Joshua Craven
+
+Mississippi Coding Academies
+Full Stack Development Program
+
+GitHub: https://github.com/jlc996
